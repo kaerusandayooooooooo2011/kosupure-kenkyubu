@@ -1,16 +1,16 @@
 @font-face {
     font-family: "Gisshiri";
-    src: url("fonts/Gisshiri.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: "nicoca";
-    src: url("fonts/nicoca.ttf") format("truetype");
+    src: url("./Gisshiri.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
 
+@font-face {
+    font-family: "nicoca";
+    src: url("./nicoca.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
 /* ==========================================
    全体設定（リセットCSS）
    ========================================== */
