@@ -1,0 +1,1253 @@
+@font-face {
+    font-family: "Gisshiri";
+    src: url("fonts/Gisshiri.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "nicoca";
+    src: url("fonts/nicoca.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ==========================================
+   全体設定（リセットCSS）
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: #ffb300;
+  overflow-x: hidden;
+}
+
+main {
+  min-height: 100vh;
+}
+
+/* ==========================================
+   各ページのPC版背景設定（左右分割）
+   ========================================== */
+.page1 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: 
+    url("images/bg1.PNG"), 
+    linear-gradient(to right, white 40%, #ffb40a 40%);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 50%, 100%;
+  background-position: 90% center, center;
+}
+
+.page2 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(to right, #ffffff 40%, #3091ff 40%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.page3 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(to right, #ffffff 40%, #ffb40a 40%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+/* PC版のtop-area / bottom-area は特に見た目を崩さないようそのまま通す */
+.top-area {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================
+   アニメーション画像（#moji）
+   ========================================== */
+#moji {
+  width: 480px;
+  position: absolute;
+  top: 150px;
+  left: 60px;
+  opacity: 0;
+  z-index: 500;
+  animation:
+    mojiAppear 0.8s ease forwards 3s,
+    mojiFloat 4s ease-in-out infinite 3.8s;
+}
+
+@keyframes mojiAppear {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mojiFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ==========================================
+   ハンバーガーボタン
+   ========================================== */
+.hamburger {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: #ffb40a;
+  margin: 6px 0;
+  transition: 0.3s;
+}
+
+.hamburger.active span {
+  background: black;
+}
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ==========================================
+   スライドメニュー
+   ========================================== */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background: white;
+  padding-top: 100px;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+  z-index: 1000;
+}
+
+.menu.open {
+  transform: translateX(0);
+}
+
+.menu a {
+  display: block;
+  padding: 12px 0 12px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 35px;
+  font-family: "Gisshiri", sans-serif;
+}
+
+.menu a.menu-home {
+  color: #ffb000;
+}
+
+.menu a.menu-about {
+  color: #168bff;
+}
+
+/* ==========================================
+   背景暗幕
+   ========================================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.4s;
+  z-index: 999;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================
+   画面固定要素（ロゴ・ボタン）
+   ========================================== */
+#topLogo {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 180px;
+  z-index: 1000;
+}
+
+#serverButton {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  width: 370px;
+  z-index: 950;
+  transition: 0.3s;
+}
+
+#serverButton img {
+  width: 100%;
+}
+
+#serverButton:hover {
+  transform: scale(1.05);
+}
+
+/* ==========================================
+   各ページ内のパーツ位置（PC版）
+   ========================================== */
+.discord-members {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #454545;
+    text-align: left;
+    font-size: 45px;
+    font-family: "Gisshiri", sans-serif;
+
+    position: absolute;
+    left: 90px;
+    top: 430px;
+
+    opacity: 0;
+    animation: memberSlideUp 1s ease-out 4s forwards;
+}
+
+@keyframes memberSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.home-title {
+  font-family: "Gisshiri", sans-serif;
+  font-size: 95px;
+  color: #ffffff;
+  letter-spacing: 0.15em;
+  position: absolute;
+  top: 85%;
+  left: 910px;
+}
+
+.member-number {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 0.15em;
+}
+#member-count {
+    font-family: "Gisshiri" !important;
+}
+
+.about-title {
+    font-family: "Gisshiri", sans-serif;
+    font-size: 100px;
+    color: #ffffff;
+    position: absolute;
+    top: 370px;
+    left: 850px;
+}
+
+.qa-title {
+  font-family: "Gisshiri", sans-serif;
+  font-size: 95px;
+  color: #ffffff;
+  letter-spacing: 0.15em;
+  position: absolute;
+  top: 40%;
+  right: 25%;
+}
+
+.about-text-container {
+  position: absolute;
+  top: 30px;
+  left: 100px;
+  right: 8%;
+  width: 45%;
+  color: #000f;
+  font-family: "nicoca", sans-serif;
+  font-size: 20px;
+  line-height: 1.0;
+  letter-spacing: 0.08em;
+}
+
+.text-space {
+  height: 25px;
+}
+
+.scroll-line {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+.scroll-line.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.qa-container {
+  position: absolute;
+  font-family: "nicoca", sans-serif;
+  top: 100px;
+  left: 8px;
+  font-size: 160%;
+  width: 48%;
+  color: #333333;
+}
+
+.qa-item {
+  margin-bottom: 24px;
+}
+
+.qa-a {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555555;
+  padding-left: 10px;
+  border-left: 3px solid #ffb40a;
+}
+
+/* ========================================
+   スマホ版 完全レイアウト調整 (700px以下)
+======================================== */
+@media screen and (max-width: 700px) {
+
+    html,
+    body {
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    main {
+        width: 100% !important;
+    }
+
+    /* 各セクションを縦並びにする */
+    .page1,
+    .page2,
+    .page3 {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    /* 上側の色付きエリア（ビジュアル部分） */
+    .page1 .top-area {
+        width: 100% !important;
+        height: 380px !important; 
+        background-color: #ffb40a !important;
+        background-image: url("images/bg1.PNG") !important;
+        background-repeat: no-repeat !important;
+        background-position: center 20px !important;
+        background-size: 85% auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important; 
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page2 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #3091ff !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 12px solid #2075e0 !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page3 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #ffb40a !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* 下側の白エリア */
+    .bottom-area {
+        width: 100% !important;
+        background-color: #ffffff !important;
+        padding: 15px 20px 30px 20px !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 各ページのタイトル調整 */
+    .home-title,
+    .about-title,
+    .qa-title {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 0 !important;
+        color: #ffffff !important;
+        font-size: clamp(32px, 9vw, 44px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+    }
+
+    /* キャッチコピー画像 (#moji) */
+    #moji {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 340px !important;
+        height: auto !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -45px auto 0 auto !important; 
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* ★参加人数：マイナスマージンを `-20px` に増やしてさらに上へ！ */
+    .discord-members {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -40px auto 8px auto !important; /* ここを調整してさらに上に引き上げました */
+        color: #454545 !important;
+        font-size: clamp(20px, 6vw, 30px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* Discordボタン */
+    #serverButton {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 330px !important;
+        left: auto !important;
+        bottom: auto !important;
+        margin: -1px auto 10px auto !important;
+    }
+
+    #serverButton img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* ABOUT本文コンテナ */
+    .about-text-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #222 !important;
+        font-size: 16px !important;
+        line-height: 1.9 !important;
+    }
+
+    /* Q&Aコンテナ */
+    .qa-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #333333 !important;
+        font-size: 16px !important;
+    }
+
+    .qa-item {
+        margin-bottom: 28px !important;
+    }
+
+    .qa-a {
+        padding-left: 10px !important;
+        border-left: 3px solid #ffb40a !important;
+        font-size: 15px !important;
+        line-height: 1.8 !important;
+    }
+
+    /* ロゴ */
+    #topLogo {
+        position: absolute !important;
+        top: 15px !important;
+        right: 12px !important;
+        width: 115px !important;
+        z-index: 1200 !important;
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger {
+        position: fixed !important;
+        top: 15px !important;
+        left: 10px !important;
+        width: 42px !important;
+        z-index: 1201 !important;
+    }
+
+    .hamburger span {
+        background: #000000 !important;
+    }
+
+    /* スマホでは吹き出しを非表示 */
+    #fukidashi1,
+    #fukidashi2,
+    #fukidashi3,
+    #fukidashi4,
+    #fukidashi5,
+    #fukidashi6 {
+        display: none !important;
+    }
+}
+
+
+/* ========================================
+   スマホ版・横長画面の共通レイアウト調整 (幅900px以下)
+======================================== */
+@media screen and (max-width: 900px) {
+
+    html,
+    body {
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    main {
+        width: 100% !important;
+    }
+
+    /* 各セクションをスマホ用の縦並びにする（高さは内容に合わせて自動で伸びるようにする） */
+    .page1,
+    .page2,
+    .page3 {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100vh !important; /* 最低でも画面1枚分の高さは確保 */
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    /* 上側の色付きエリア（ビジュアル部分） */
+    .page1 .top-area {
+        width: 100% !important;
+        height: 380px !important; 
+        background-color: #ffb40a !important;
+        background-image: url("images/bg1.PNG") !important;
+        background-repeat: no-repeat !important;
+        background-position: center 20px !important;
+        background-size: 85% auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important; 
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page2 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #3091ff !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 12px solid #2075e0 !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page3 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #ffb40a !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* 下側の白エリア */
+    .bottom-area {
+        width: 100% !important;
+        background-color: #ffffff !important;
+        padding: 15px 20px 50px 20px !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 各ページのタイトル調整 */
+    .home-title,
+    .about-title,
+    .qa-title {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 0 !important;
+        color: #ffffff !important;
+        font-size: clamp(32px, 9vw, 44px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+    }
+
+    /* キャッチコピー画像 (#moji) */
+    #moji {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 340px !important;
+        height: auto !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -45px auto 0 auto !important; 
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* 参加人数 */
+    .discord-members {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -20px auto 8px auto !important;
+        color: #454545 !important;
+        font-size: clamp(20px, 6vw, 30px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* Discordボタン */
+    #serverButton {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 330px !important;
+        left: auto !important;
+        bottom: auto !important;
+        margin: -5px auto 10px auto !important;
+    }
+
+    #serverButton img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* ABOUT本文コンテナ */
+    .about-text-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #222 !important;
+        font-size: 16px !important;
+        line-height: 1.9 !important;
+    }
+
+    /* Q&Aコンテナ */
+    .qa-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #333333 !important;
+        font-size: 16px !important;
+    }
+
+    .qa-item {
+        margin-bottom: 28px !important;
+    }
+
+    .qa-a {
+        padding-left: 10px !important;
+        border-left: 3px solid #ffb40a !important;
+        font-size: 15px !important;
+        line-height: 1.8 !important;
+    }
+
+    /* ロゴ */
+    #topLogo {
+        position: absolute !important;
+        top: 15px !important;
+        right: 12px !important;
+        width: 115px !important;
+        z-index: 1200 !important;
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger {
+        position: fixed !important;
+        top: 15px !important;
+        left: 10px !important;
+        width: 42px !important;
+        z-index: 1201 !important;
+    }
+
+    .hamburger span {
+        background: #000000 !important;
+    }
+
+    /* スマホでは吹き出しを非表示 */
+    #fukidashi1,
+    #fukidashi2,
+    #fukidashi3,
+    #fukidashi4,
+    #fukidashi5,
+    #fukidashi6 {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   スマホ・iPad縦向き用レイアウト調整 (768px以下)
+======================================== */
+@media screen and (max-width: 768px) {
+
+    html,
+    body {
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    main {
+        width: 100% !important;
+    }
+
+    /* 各セクションを縦並びにする */
+    .page1,
+    .page2,
+    .page3 {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    /* 上側の色付きエリア（ビジュアル部分） */
+    .page1 .top-area {
+        width: 100% !important;
+        height: 380px !important; 
+        background-color: #ffb40a !important;
+        background-image: url("images/bg1.PNG") !important;
+        background-repeat: no-repeat !important;
+        background-position: center 20px !important;
+        background-size: 85% auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important; 
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page2 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #3091ff !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 12px solid #2075e0 !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page3 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #ffb40a !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* 下側の白エリア */
+    .bottom-area {
+        width: 100% !important;
+        background-color: #ffffff !important;
+        padding: 15px 20px 30px 20px !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 各ページのタイトル調整 */
+    .home-title,
+    .about-title,
+    .qa-title {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 0 !important;
+        color: #ffffff !important;
+        font-size: clamp(32px, 9vw, 44px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+    }
+
+    /* キャッチコピー画像 (#moji) */
+    #moji {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 340px !important;
+        height: auto !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -45px auto 0 auto !important; 
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* 参加人数 */
+    .discord-members {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -20px auto 8px auto !important;
+        color: #454545 !important;
+        font-size: clamp(20px, 6vw, 30px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* Discordボタン */
+    #serverButton {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 330px !important;
+        left: auto !important;
+        bottom: auto !important;
+        margin: -5px auto 10px auto !important;
+    }
+
+    #serverButton img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* ABOUT本文コンテナ */
+    .about-text-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #222 !important;
+        font-size: 16px !important;
+        line-height: 1.9 !important;
+    }
+
+    /* Q&Aコンテナ */
+    .qa-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #333333 !important;
+        font-size: 16px !important;
+    }
+
+    .qa-item {
+        margin-bottom: 28px !important;
+    }
+
+    .qa-a {
+        padding-left: 10px !important;
+        border-left: 3px solid #ffb40a !important;
+        font-size: 15px !important;
+        line-height: 1.8 !important;
+    }
+
+    /* ロゴ */
+    #topLogo {
+        position: absolute !important;
+        top: 15px !important;
+        right: 12px !important;
+        width: 115px !important;
+        z-index: 1200 !important;
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger {
+        position: fixed !important;
+        top: 15px !important;
+        left: 10px !important;
+        width: 42px !important;
+        z-index: 1201 !important;
+    }
+
+    .hamburger span {
+        background: #000000 !important;
+    }
+
+    /* スマホでは吹き出しを非表示 */
+    #fukidashi1,
+    #fukidashi2,
+    #fukidashi3,
+    #fukidashi4,
+    #fukidashi5,
+    #fukidashi6 {
+        display: none !important;
+    }
+}
+
+/* ========================================
+   スマホ・iPad（縦・横すべて）縦並び強制レイアウト (幅1024px以下、または横向き)
+======================================== */
+@media screen and (max-width: 1024px), screen and (orientation: landscape) and (max-width: 1366px) {
+
+    html,
+    body {
+        width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    main {
+        width: 100% !important;
+    }
+
+    /* 各セクションを完全に縦並び（flex-direction: column）にする */
+    .page1,
+    .page2,
+    .page3 {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    /* 上側の色付きエリア（ビジュアル部分） */
+    .page1 .top-area {
+        width: 100% !important;
+        height: 380px !important; 
+        background-color: #ffb40a !important;
+        background-image: url("images/bg1.PNG") !important;
+        background-repeat: no-repeat !important;
+        background-position: center 20px !important;
+        background-size: 85% auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important; 
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page2 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #3091ff !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 12px solid #2075e0 !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .page3 .top-area {
+        width: 100% !important;
+        height: 180px !important;
+        background-color: #ffb40a !important;
+        display: flex !important;
+        align-items: flex-end !important;
+        justify-content: center !important;
+        position: relative !important;
+        padding-bottom: 20px !important;
+        border-bottom: 15px solid #ffb40a !important;
+        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* 下側の白エリア */
+    .bottom-area {
+        width: 100% !important;
+        background-color: #ffffff !important;
+        padding: 15px 20px 30px 20px !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 各ページのタイトル調整 */
+    .home-title,
+    .about-title,
+    .qa-title {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: 0 !important;
+        color: #ffffff !important;
+        font-size: clamp(32px, 9vw, 44px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+    }
+
+    /* キャッチコピー画像 (#moji) */
+    #moji {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 340px !important;
+        height: auto !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -45px auto 0 auto !important; 
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* 参加人数 */
+    .discord-members {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        margin: -20px auto 8px auto !important;
+        color: #454545 !important;
+        font-size: clamp(20px, 6vw, 30px) !important;
+        text-align: center !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    /* Discordボタン */
+    #serverButton {
+        position: relative !important;
+        display: block !important;
+        width: 85% !important;
+        max-width: 330px !important;
+        left: auto !important;
+        bottom: auto !important;
+        margin: -5px auto 10px auto !important;
+    }
+
+    #serverButton img {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* ABOUT本文コンテナ */
+    .about-text-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #222 !important;
+        font-size: 16px !important;
+        line-height: 1.9 !important;
+    }
+
+    /* Q&Aコンテナ */
+    .qa-container {
+        position: relative !important;
+        width: 100% !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #333333 !important;
+        font-size: 16px !important;
+    }
+
+    .qa-item {
+        margin-bottom: 28px !important;
+    }
+
+    .qa-a {
+        padding-left: 10px !important;
+        border-left: 3px solid #ffb40a !important;
+        font-size: 15px !important;
+        line-height: 1.8 !important;
+    }
+
+    /* ロゴ */
+    #topLogo {
+        position: absolute !important;
+        top: 15px !important;
+        right: 12px !important;
+        width: 115px !important;
+        z-index: 1200 !important;
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger {
+        position: fixed !important;
+        top: 15px !important;
+        left: 10px !important;
+        width: 42px !important;
+        z-index: 1201 !important;
+    }
+
+    .hamburger span {
+        background: #000000 !important;
+    }
+
+    /* スマホ・iPadでは吹き出しを非表示 */
+    #fukidashi1,
+    #fukidashi2,
+    #fukidashi3,
+    #fukidashi4,
+    #fukidashi5,
+    #fukidashi6 {
+        display: none !important;
+    }
+}

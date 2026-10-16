@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コスプレ研究部</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* オープニング */
+        #opening {
+            position: fixed;
+            inset: 0;
+            background: #FFFDF7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: openingDisappear .8s ease forwards;
+            animation-delay: 2.8s;
+        }
+
+        #opening img {
+            width: 420px;
+            animation: logoDisappear .8s ease forwards;
+            animation-delay: 2s;
+        }
+
+        /* ロゴが消える */
+        @keyframes logoDisappear {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0px);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.05);
+                filter: blur(10px);
+            }
+        }
+
+        /* オープニング画面が消える */
+        @keyframes openingDisappear {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- オープニング画面 -->
+    <div id="opening">
+        <img src="images/logo.png" alt="コスプレ研究部">
+    </div>
+
+    <!-- ナビゲーション等（全ページ共通固定パーツ） -->
+    <button id="hamburger" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav id="menu" class="menu">
+        <a href="#home" class="menu-home">HOME</a>
+        <a href="#about" class="menu-about">ABOUT</a>
+        <a href="#qa">Q&A</a>
+        <a href="terms.html" class="menu-home">利用規約</a>
+        <a href="rules.html" class="menu-about">RULES</a>
+    </nav>
+
+    <div id="overlay" class="overlay"></div>
+
+    <img src="images/logo.png" id="topLogo" alt="コスプレ研究部ロゴ">
+
+    <main>
+        <!-- 1ページ目：HOME -->
+        <section class="page1" id="home">
+            <div class="top-area">
+                <h2 class="home-title">HOME</h2>
+            </div>
+            <div class="bottom-area">
+                <img src="images/moji.PNG" id="moji" alt="君の推しを最高の形で">
+
+                <div class="discord-members">
+                    <div>Discord参加人数：</div>
+                    <div>
+                        <span id="member-count" class="member-number">
+                            <span>---</span>
+                        </span>人
+                    </div>
+                </div>
+
+                <a href="https://discord.gg/p53PeD2Ncj" id="serverButton">
+                    <img src="images/button1.PNG" alt="サーバーに参加する">
+                </a>
+            </div>
+        </section>
+
+        <!-- 2ページ目：ABOUT -->
+        <section class="page2" id="about">
+            <div class="top-area">
+                <h2 class="about-title">ABOUT</h2>
+            </div>
+            <div class="bottom-area">
+                <div class="about-text-container">
+                    <p class="scroll-line highlight">コスプレ研究部とは？</p>
+                    <p class="scroll-line">ずばり！</p>
+                    <p class="scroll-line">コスプレ研究部は、</p>
+                    <p class="scroll-line">初心者から上級者まで、</p>
+                    <p class="scroll-line">コスプレが好きな人が集まるコミュニティです。</p>
+
+                    <div class="text-space"></div>
+
+                    <p class="scroll-line">衣装の作り方、ウィッグのセット、</p>
+                    <p class="scroll-line">メイク、撮影方法など、</p>
+                    <p class="scroll-line">コスプレをしていると</p>
+                    <p class="scroll-line">「これってどうやるの？」</p>
+                    <p class="scroll-line">と思うことはたくさんあります。</p>
+
+                    <div class="text-space"></div>
+
+                    <p class="scroll-line">そんなときは、経験のあるメンバーに直接聞いてみたり、</p>
+                    <p class="scroll-line">自分が知っていることを誰かに教えてあげたり。</p>
+
+                    <div class="text-space"></div>
+
+                    <p class="scroll-line">「分からない」を気軽に聞けて、</p>
+                    <p class="scroll-line">「知りたい」を</p>
+                    <p class="scroll-line">みんなで解決できる。</p>
+
+                    <div class="text-space"></div>
+
+                    <p class="scroll-line">初心者だから聞きにくい、</p>
+                    <p class="scroll-line">上級者だから教える側……</p>
+                    <p class="scroll-line">なんて決まりはありません。</p>
+
+                    <div class="text-space"></div>
+
+                    <p class="scroll-line">それぞれの経験や知識を持ち寄って、</p>
+                    <p class="scroll-line">みんなでコスプレをもっと楽しむ。</p>
+                    <p class="scroll-line highlight">それが、コスプレ研究部です。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3ページ目：Q&A -->
+        <section class="page3" id="qa">
+            <div class="top-area">
+                <h2 class="qa-title">Q&A</h2>
+            </div>
+            <div class="bottom-area">
+                <div class="qa-container">
+                    <div class="qa-item scroll-line">
+                        <div class="qa-q">Q. 何歳でも入れますか？</div>
+                        <div class="qa-a">A. 14歳以上なら誰でも可能です！</div>
+                    </div>
+
+                    <div class="qa-item scroll-line">
+                        <div class="qa-q">Q. 初心者でも参加して大丈夫ですか？</div>
+                        <div class="qa-a">A. もちろんです！衣装作りやメイクが初めての方もたくさんいます。</div>
+                        <div class="qa-a">メンバーが優しく教えてくれるので安心してください！</div>
+                    </div>
+
+                    <div class="qa-item scroll-line">
+                        <div class="qa-q">Q. 主にどんな活動をしていますか？</div>
+                        <div class="qa-a">A. Discord内での雑談や質問・アドバイス共有、</div>
+                        <div class="qa-a">定期的なイベントや交流を行っています。</div>
+                    </div>
+
+                    <div class="qa-item scroll-line">
+                        <div class="qa-q">Q. 閲覧専用（ROM専）でも大丈夫ですか？</div>
+                        <div class="qa-a">A. 大歓迎です！</div>
+                        <div class="qa-a">まずは雰囲気を見るだけでもOKなので、</div>
+                        <div class="qa-a">気軽に覗いてみてください。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コスプレ研究部</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            background:#FFFDF7;
+            overflow:hidden;
+        }
+
+        /* オープニング */
+        #opening{
+            position:fixed;
+            inset:0;
+            background:#FFFDF7;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            z-index:9999;
+
+            animation:openingDisappear .8s ease forwards;
+            animation-delay:2.8s;
+        }
+
+        #opening img{
+            width:420px;
+            animation:logoDisappear .8s ease forwards;
+            animation-delay:2s;
+        }
+
+        /* ロゴが消える */
+        @keyframes logoDisappear{
+
+            0%{
+                opacity:1;
+                transform:scale(1);
+                filter:blur(0px);
+            }
+
+            100%{
+                opacity:0;
+                transform:scale(1.05);
+                filter:blur(10px);
+            }
+
+        }
+
+        /* オープニング画面が消える */
+        @keyframes openingDisappear{
+
+            to{
+                opacity:0;
+                visibility:hidden;
+            }
+
+        }
+
+        main{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-size:3rem;
+            color:#444;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="opening">
+    <img src="images/logo.png" alt="コスプレ研究部">
+</div>
+
+<main>
+    ホーム画面
+</main>
+
+</body>
+</html>

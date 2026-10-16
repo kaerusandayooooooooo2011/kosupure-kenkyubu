@@ -1,0 +1,494 @@
+/* =========================
+   TERMS PAGE DESIGN
+========================= */
+
+@font-face {
+  font-family: "Gisshiri";
+  src: url("./fonts/Gisshiri.ttf") format("truetype");
+}
+.terms-hero h1 {
+  font-family: "Gisshiri", sans-serif;
+  letter-spacing: 0.2em;
+  color: #000;
+  font-weight: 400;
+}
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #ffb000;
+    color: #171717;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+/* ロゴ */
+
+.terms-logo-link {
+    position: fixed;
+    top: 22px;
+    right: 25px;
+    z-index: 1001;
+}
+
+#topLogo {
+    display: block;
+    width: 145px;
+    max-width: 24vw;
+    height: auto;
+}
+
+/* オープニング */
+
+#opening {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fffdf7;
+    animation: openingDisappear .8s ease forwards;
+    animation-delay: 2.8s;
+}
+
+#opening img {
+    width: 420px;
+    max-width: 80vw;
+    height: auto;
+    animation: logoDisappear .8s ease forwards;
+    animation-delay: 2s;
+}
+
+@keyframes logoDisappear {
+    from {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.05);
+        filter: blur(10px);
+    }
+}
+
+@keyframes openingDisappear {
+    to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+}
+
+/* =========================
+   左右レイアウト
+========================= */
+
+.terms-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+/* 左側のヒーロー */
+
+.terms-hero {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    min-height: 650px;
+    padding: 145px 45px 35px 6vw;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    background: #ffb000;
+    border-right: 3px solid #171717;
+}
+
+.hero-label {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 30px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2.5px;
+}
+
+.hero-title-wrap {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-number {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 5px 9px;
+    background: #168bff;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.terms-hero h1 {
+    position: relative;
+    margin: 0;
+    font-size: clamp(65px, 7.2vw, 108px);
+    line-height: 1.08;
+    letter-spacing: 0.1em;
+    font-weight: 1000;
+}
+.terms-hero h1 span {
+    color: #168bff;
+}
+
+.hero-line {
+    position: relative;
+    z-index: 2;
+    width: 90px;
+    height: 9px;
+    margin-top: 28px;
+    background: #171717;
+}
+
+.hero-description {
+    position: relative;
+    z-index: 2;
+    max-width: 290px;
+    margin: 25px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 2;
+}
+
+.hero-bottom {
+    position: absolute;
+    z-index: 2;
+    right: 30px;
+    bottom: 25px;
+    left: 6vw;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* 背景グラフィック */
+
+.hero-shape {
+    position: absolute;
+    pointer-events: none;
+}
+
+.shape-blue {
+    width: 180px;
+    height: 180px;
+    right: -75px;
+    top: 13%;
+    background: #168bff;
+    border-radius: 50%;
+}
+
+.shape-white {
+    width: 95px;
+    height: 95px;
+    right: 35px;
+    top: 24%;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.9;
+}
+
+.shape-orange {
+    width: 130px;
+    height: 130px;
+    left: -75px;
+    bottom: 12%;
+    border: 18px solid #fff;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+/* =========================
+   右側の規約本文
+========================= */
+
+.terms-content {
+    min-width: 0;
+    padding: 125px clamp(25px, 4vw, 65px) 60px;
+    background: #fff;
+}
+
+.content-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #171717;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.content-topline span:last-child {
+    color: #168bff;
+}
+
+.terms-intro {
+    margin: 25px 0;
+    font-size: 14px;
+    line-height: 2;
+    color: #444;
+}
+
+/* 年齢案内 */
+
+.terms-notice {
+    margin: 28px 0 40px;
+    padding: 20px;
+    background: #edf6ff;
+    border-left: 5px solid #168bff;
+}
+
+.terms-notice strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #0874db;
+}
+
+.terms-notice p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.9;
+    font-weight: 700;
+}
+
+/* 各条文 */
+
+.terms-section {
+    margin: 0 0 32px;
+    padding: 0 0 28px;
+    border-bottom: 1px solid #dedede;
+    overflow-wrap: anywhere;
+}
+
+.terms-section h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 17px;
+    padding: 0 0 12px;
+    border-bottom: 2px solid #ffb000;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.6;
+}
+
+.terms-section h2 span {
+    flex: 0 0 auto;
+    color: #168bff;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.terms-section p {
+    margin: 0 0 12px;
+    color: #333;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.terms-section ol {
+    margin: 12px 0 0;
+    padding-left: 22px;
+}
+
+.terms-section li {
+    margin-bottom: 11px;
+    padding-left: 3px;
+    color: #333;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.terms-section li::marker {
+    color: #168bff;
+    font-weight: 900;
+}
+
+/* フッター */
+
+.terms-footer {
+    padding: 15px 0 35px;
+    text-align: center;
+}
+
+.terms-footer p {
+    margin-bottom: 22px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.terms-footer a {
+    display: inline-block;
+    padding: 13px 22px;
+    background: #168bff;
+    border: 2px solid #171717;
+    box-shadow: 4px 4px 0 #171717;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.terms-footer a:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 #171717;
+}
+
+/* =========================
+   タブレット
+========================= */
+
+@media (max-width: 900px) and (min-width: 701px) {
+    .terms-layout {
+        grid-template-columns: minmax(250px, 0.75fr) minmax(0, 1.25fr);
+    }
+
+    .terms-hero {
+        padding-right: 25px;
+        padding-left: 35px;
+    }
+
+    .terms-hero h1 {
+        font-size: clamp(60px, 8vw, 78px);
+    }
+
+    .terms-content {
+        padding-right: 28px;
+        padding-left: 28px;
+    }
+}
+
+/* =========================
+   スマートフォン
+========================= */
+
+@media (max-width: 700px) {
+    .terms-layout {
+        display: block;
+    }
+
+    .terms-logo-link {
+        top: 15px;
+        right: 15px;
+    }
+
+    #topLogo {
+        width: 105px;
+    }
+
+    .terms-hero {
+        position: relative;
+        height: auto;
+        min-height: 570px;
+        padding: 135px 28px 85px;
+        border-right: none;
+        border-bottom: 3px solid #171717;
+    }
+
+    .terms-hero h1 {
+        font-size: clamp(72px, 17vw, 105px);
+    }
+
+    .hero-label {
+        font-size: 10px;
+    }
+
+    .hero-description {
+        max-width: 260px;
+    }
+
+    .hero-bottom {
+        right: 25px;
+        left: 28px;
+        bottom: 20px;
+    }
+
+    .terms-content {
+        padding: 35px 24px 45px;
+    }
+
+    .content-topline {
+        font-size: 9px;
+    }
+
+    .terms-section h2 {
+        font-size: 17px;
+    }
+
+    .terms-section p,
+    .terms-section li {
+        font-size: 13px;
+    }
+
+    .terms-notice {
+        padding: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .terms-footer a {
+        transition: none;
+    }
+}
+/* 利用規約ページ：ハンバーガーボタンを白くする */
+body .hamburger span {
+    background-color: #fff;
+}
+
+.menu a {
+  font-family: "Gisshiri", sans-serif;
+}
+
+.menu a.menu-home {
+  color: #ffb000;
+}
+
+.menu a.menu-about {
+  color: #168bff;
+}
+
+/* ハンバーガーメニューの文字を大きく */
+.menu a {
+  font-size: 35px;
+  padding: 12px 0;
+}
+
+.menu a {
+  padding-left: 20px;
+}
